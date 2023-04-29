@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
 
 // require connection from mongoDB
@@ -8,6 +9,9 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express());
 
-app.listen(PORT, () => {
-  console.log(`Listening on http://localhost:${PORT}`);
+mongoose.connection.once("open", () => {
+  console.log("MongoDB Running");
+  app.listen(PORT, () => {
+    console.log(`Listening for API on http://localhost:${PORT}`);
+  });
 });
