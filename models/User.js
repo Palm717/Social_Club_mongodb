@@ -17,12 +17,18 @@ const userSchema = new Schema({
     },
     message: "Invalid Email Address",
   },
-  thoughts: {
-    // Array of _id values referencing the Thought model
-  },
-  friends: {
-    // Array of _id values referencing the User model (self-reference)
-  },
+  thoughts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "thought",
+    },
+  ],
+  friends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
+  ],
 });
 
 const User = model("user", userSchema);
