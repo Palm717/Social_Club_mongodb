@@ -1,14 +1,6 @@
-const { User } = require("../../models/User");
 const router = require("express").Router();
+const userController = require("../../controllers/userControllers");
 
-router.get("/", async (req, res) => {
-  try {
-    const users = await User.find();
-    res.json(users);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
+router.get("/", userController);
 
 module.exports = router;
