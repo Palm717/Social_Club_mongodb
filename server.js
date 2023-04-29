@@ -10,9 +10,9 @@ const connection = require("./config/connection");
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
-app.use(routes);
+app.use("/api", routes);
 
 mongoose.connection.once("open", () => {
   console.log("SocialClub Running");
