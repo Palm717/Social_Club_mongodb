@@ -1,5 +1,7 @@
+// import User schema / model
 const { User } = require("../models/User");
 
+// create user function
 const createUser = async (req, res) => {
   try {
     const user = await User.create(req.body);
@@ -10,6 +12,7 @@ const createUser = async (req, res) => {
   }
 };
 
+// get all users function
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -20,6 +23,7 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+// export functions
 module.exports = {
   createUser,
   getAllUsers,

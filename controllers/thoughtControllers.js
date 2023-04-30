@@ -1,5 +1,7 @@
+// import Though schema / model
 const { Thought } = require("../models/Thought");
 
+// create a though function
 const createThought = async (req, res) => {
   try {
     const thought = await Thought.create(req.body);
@@ -10,6 +12,7 @@ const createThought = async (req, res) => {
   }
 };
 
+// get all thoughts function
 const getAllThoughts = async (req, res) => {
   try {
     const thoughts = await Thought.find().populate("reactions");
@@ -20,6 +23,7 @@ const getAllThoughts = async (req, res) => {
   }
 };
 
+// export thought fucntion
 module.exports = {
   createThought,
   getAllThoughts,

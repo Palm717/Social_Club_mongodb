@@ -1,5 +1,7 @@
+// import Schema, model functions
 const { Schema, model } = require("mongoose");
 
+// create schema
 const userSchema = new Schema({
   username: {
     type: String,
@@ -31,6 +33,8 @@ const userSchema = new Schema({
   ],
 });
 
+// use the model
 const User = model("user", userSchema);
 
+// export the model
 module.exports = User;
