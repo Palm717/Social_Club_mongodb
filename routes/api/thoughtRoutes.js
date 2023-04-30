@@ -4,6 +4,6 @@ const {
   getAllThoughts,
 } = require("../../controllers/thoughtControllers");
 
-router.post(createThought).get(getAllThoughts);
+router.route("/").post(createThought).get(getAllThoughts);
 
 module.exports = router;

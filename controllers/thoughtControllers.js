@@ -1,5 +1,5 @@
 // import Though schema / model
-const { Thought } = require("../models/Thought");
+const Thought = require("../models/Thought");
 
 // create a though function
 const createThought = async (req, res) => {

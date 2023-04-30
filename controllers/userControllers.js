@@ -1,5 +1,5 @@
 // import User schema / model
-const { User } = require("../models/User");
+const User = require("../models/User");
 
 // create user function
 const createUser = async (req, res) => {
