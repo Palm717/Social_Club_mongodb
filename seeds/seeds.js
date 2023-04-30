@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const connect = require("../config/connection");
 const User = require("../models/User");
 
 const userSeeds = [
@@ -22,6 +21,11 @@ const userSeeds = [
 ];
 
 async function seed() {
+  await mongoose.connect("mongodb://127.0.0.1:27017/socialClubDb", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+
   await User.insertMany(userSeeds);
   mongoose.connection.close();
   console.log(`socialClubDb seeded`);
@@ -31,4 +35,4 @@ seed().catch((err) => {
   console.error(`Error in seeding socialClubDb `, err);
 });
 
-module.exports = userSeeds;
+// module.exports = userSeeds;
