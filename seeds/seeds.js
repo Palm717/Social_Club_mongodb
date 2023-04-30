@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const Thought = require("../models/Thought");
+const Reaction = require("../models/Reaction");
 const userSeeds = require("./userSeeds");
 const thoughtSeeds = require("./thoughtSeeds");
+const reactionSeed = require("./reactionSeeds");
 
 mongoose.connect("mongodb://127.0.0.1:27017/socialClubDb", {
   useNewUrlParser: true,
@@ -12,16 +14,20 @@ mongoose.connect("mongodb://127.0.0.1:27017/socialClubDb", {
 const seed = async () => {
   await User.deleteMany({});
   await User.insertMany(userSeeds);
-  console.log("Users seeded");
+  console.log(`Users seeded`);
 
   await Thought.deleteMany({});
   await Thought.insertMany(thoughtSeeds);
-  console.log("Thoughts seeded");
+  console.log(`Thoughts seeded`);
+
+  // await Reaction.deleteMany({});
+  await Reaction.insertMany(reactionSeed);
+  console.log(`reactions seeded`);
 
   mongoose.connection.close();
-  console.log("Database connection closed");
+  console.log(`Database connection closed`);
 };
 
 seed().catch((err) => {
-  console.error("Error in seeding socialClubDb ", err);
+  console.error(`Error in seeding socialClubDb`, err);
 });
