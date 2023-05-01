@@ -4,7 +4,6 @@ const Thought = require("../models/Thought");
 const Reaction = require("../models/Reaction");
 const userSeeds = require("./userSeeds");
 const thoughtSeeds = require("./thoughtSeeds");
-const reactionSeed = require("./reactionSeeds");
 
 mongoose.connect("mongodb://127.0.0.1:27017/socialClubDb", {
   useNewUrlParser: true,
@@ -19,10 +18,6 @@ const seed = async () => {
   await Thought.deleteMany({});
   await Thought.insertMany(thoughtSeeds);
   console.log(`Thoughts seeded`);
-
-  // await Reaction.deleteMany({});
-  await Reaction.insertMany(reactionSeed);
-  console.log(`reactions seeded`);
 
   mongoose.connection.close();
   console.log(`Database connection closed`);

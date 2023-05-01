@@ -23,18 +23,13 @@ const thoughtSchema = new Schema({
     type: String,
     required: true,
   },
-  reactions: [
-    {
-      type: reactionSchema,
-      required: true,
-    },
-  ],
+  reactions: [reactionSchema],
 });
-
-const Thoughts = model("thought", thoughtSchema);
 
 thoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;
 });
+
+const Thoughts = model("thought", thoughtSchema);
 
 module.exports = Thoughts;
