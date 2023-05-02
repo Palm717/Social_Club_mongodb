@@ -42,12 +42,15 @@ const getUserById = async (req, res) => {
 
 const updateUserById = async (req, res) => {
   const userId = req.params.id;
+  const updateBody = req.body;
   try {
-    const user = await User.findByIdAndUpdate(userId);
+    const user = await User.findByIdAndUpdate(userId, updateBody, {
+      new: true,
+    });
     if (!user) {
       res.status(404).json({ error: `Cannot find user by ID ${userId}` });
     } else {
-      res.json({ found: `Found and updated user ID ${userId}` });
+      res.status(200).json(updateBody);
     }
   } catch (err) {
     res
@@ -74,11 +77,9 @@ const updateFriendList = async (req, res) => {
     console.error(
       `Error adding friend with ID ${friendId} to user with ID ${userId} `
     );
-    res
-      .status(500)
-      .json({
-        error: `cannot add friend with ID ${friendId} to user with ID ${userId}`,
-      });
+    res.status(500).json({
+      error: `cannot add friend with ID ${friendId} to user with ID ${userId}`,
+    });
   }
 };
 
@@ -88,4 +89,5 @@ module.exports = {
   getAllUsers,
   getUserById,
   updateUserById,
+  updateFriendList,
 };

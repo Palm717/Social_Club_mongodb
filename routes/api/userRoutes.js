@@ -7,11 +7,13 @@ const {
   getAllUsers,
   getUserById,
   updateUserById,
+  updateFriendList,
 } = require("../../controllers/userControllers");
 
 // http methods
 router.route("/").post(createUser).get(getAllUsers);
-router.route("/").get(getUserById).put(updateUserById);
+router.route("/:id").get(getUserById).put(updateUserById);
+router.route("/:id/friendsList").put(updateFriendList);
 
 // export module
 module.exports = router;
