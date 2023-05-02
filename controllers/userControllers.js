@@ -1,6 +1,8 @@
 // import User schema / model
 const User = require("../models/User");
 
+const mongoose = require("mongoose");
+
 // create user function
 const createUser = async (req, res) => {
   try {
@@ -60,8 +62,8 @@ const updateUserById = async (req, res) => {
 };
 
 const updateFriendList = async (req, res) => {
-  const userId = req.parms.id;
-  const friendId = req.body.friendId;
+  const userId = req.params.id;
+  const friendId = new mongoose.Types.ObjectId();
   try {
     const user = await User.findByIdAndUpdate(
       userId,

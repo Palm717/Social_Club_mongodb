@@ -13,7 +13,7 @@ const {
 // http methods
 router.route("/").post(createUser).get(getAllUsers);
 router.route("/:id").get(getUserById).put(updateUserById);
-router.route("/:id/friendsList").put(updateFriendList);
+router.route("/:id/friendsList").post(updateFriendList);
 
 // export module
 module.exports = router;
