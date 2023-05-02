@@ -5,10 +5,13 @@ const router = require("express").Router();
 const {
   createUser,
   getAllUsers,
+  getUserById,
+  updateUserById,
 } = require("../../controllers/userControllers");
 
 // http methods
 router.route("/").post(createUser).get(getAllUsers);
+router.route("/").get(getUserById).put(updateUserById);
 
 // export module
 module.exports = router;

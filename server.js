@@ -1,7 +1,6 @@
 // import modules
 const express = require("express");
 const mongoose = require("mongoose");
-// const routes = require("./routes/api/index");
 const routes = require("./routes/api/index");
 
 // app instances
