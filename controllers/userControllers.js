@@ -85,6 +85,22 @@ const updateFriendList = async (req, res) => {
   }
 };
 
+const deleteUserById = async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const user = await User.deleteOne({ _id: userId });
+    if (!user) {
+      res.status(404).json({ error: `User with ID ${userId} not found` });
+    } else {
+      res
+        .status(200)
+        .json({ message: `Successful deletion of user ID ${userId}` });
+    }
+  } catch (err) {
+    res.status(500).json({ error: `cannot delete user with ID ${userId}` });
+  }
+};
+
 // export functions
 module.exports = {
   createUser,
@@ -92,4 +108,5 @@ module.exports = {
   getUserById,
   updateUserById,
   updateFriendList,
+  deleteUserById,
 };
