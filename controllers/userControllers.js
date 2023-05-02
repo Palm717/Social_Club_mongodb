@@ -26,7 +26,9 @@ const getAllUsers = async (req, res) => {
 const getUserById = async (req, res) => {
   const userId = req.params.id;
   try {
-    const user = await User.findById(userId);
+    const user = await User.findById(userId)
+      .populate("thoughts")
+      .populate("friends");
     if (!user) {
       res.status(404).json({ error: `No user found with ID ${userId}` });
     } else {
@@ -43,7 +45,7 @@ const updateUserById = async (req, res) => {
   try {
     const user = await User.findByIdAndUpdate(userId);
     if (!user) {
-      res.status(400).json({ error: `Cannot find user by ID ${userId}` });
+      res.status(404).json({ error: `Cannot find user by ID ${userId}` });
     } else {
       res.json({ found: `Found and updated user ID ${userId}` });
     }
@@ -51,6 +53,32 @@ const updateUserById = async (req, res) => {
     res
       .status(500)
       .json({ error: `cannot find and update user by ID ${userId}` });
+  }
+};
+
+const updateFriendList = async (req, res) => {
+  const userId = req.parms.id;
+  const friendId = req.body.friendId;
+  try {
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $addToSet: { friends: friendId } },
+      { new: true }
+    );
+    if (!user) {
+      res.status(404).json({ error: `No user found by id ${userId}` });
+    } else {
+      res.send(`Added friend with ID ${friendId} to friends list`);
+    }
+  } catch (err) {
+    console.error(
+      `Error adding friend with ID ${friendId} to user with ID ${userId} `
+    );
+    res
+      .status(500)
+      .json({
+        error: `cannot add friend with ID ${friendId} to user with ID ${userId}`,
+      });
   }
 };
 
